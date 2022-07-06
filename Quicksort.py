@@ -1,11 +1,10 @@
-from random import ranint
+import random
 import pandas as pd
 import csv
 
-Random_number = []
-Repeat_count = 1000000
-
-for i in Repeat_count:
-    Random_number = ranint()
-
+Number_list = [1000000]
+for i in Number_list:
+    Random_number = random.randint(1,2147483647)
+    Number_list.append(Random_number)
+    print(Random_number)
 # CSV 저장하는 것 추가 
