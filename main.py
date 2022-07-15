@@ -8,4 +8,5 @@ if __name__ =="__main__":
     Quicksort.Reverse_sort()
     Quicksort.csv_open()
     end = time.time()
+    # Quicksort.pandas_csv()
     print(time.time()-start)

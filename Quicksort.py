@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import csv
 
+left_list =[]
+right_list=[]
 
 def swap(big_value, small_value):
     temp = big_value
@@ -12,14 +14,9 @@ def swap(big_value, small_value):
 def Random_number():
     Random_list = list(range(1,1000000))
     random.shuffle(Random_list) # 랜덤 상태
-    
     file = open('randomquicksort.csv', 'w', encoding='utf-8', newline='')
-    csv_writer = csv.writer(file)
-    csv_writer.writerow(Random_list)
+    file.writelines('\n'.join(map(str,Random_list))) # 개행을 주어 CSV 파일에 입력
     file.close()
-
-
-
 
 def Forward_sort():
     Forward_list = list(range(1,1000000))
@@ -38,30 +35,30 @@ def Reverse_sort():
     file.close()
     
 def csv_open():
+    csv_list = []
     csv_path = open('randomquicksort.csv', 'r')
     Random_csv = csv.reader(csv_path)
-    csv_list = []
-    for line in Random_csv:
-        csv_list.append(line)
-    
-    print(quicksort_action(line))
+    for i in Random_csv:
+        csv_list.append(i)
+    print(quicksort_action(csv_list))
     
 def quicksort_action(num_list):
+    pivot_num = num_list[0]
+    print(type(pivot_num))
+    remainder_list = pivot_num[1:]
     if len(num_list) <= 1:
-        print("정렬 대상 개수 1개" + str(num_list))
         return num_list
-    else:
-        pivot_num = num_list[0]
-        remainder_list = pivot_num[1:]
-        
-        for i in remainder_list:
-            if i > pivot_num:
-                left_list = i
-        for i in remainder_list:
-            if i < pivot_num:
-                right_list = i
 
-        return quicksort_action(left_list)+[pivot_num]+quicksort_action(right_list)
+    
+        
+    for i in remainder_list:
+        if i < pivot_num:
+            left_list.append(i)
+    for i in remainder_list:
+        if i > pivot_num:
+            right_list.append(i)
+
+    return quicksort_action(left_list)+[pivot_num]+quicksort_action(right_list)
 
 #     Number_list = []
 #     Random_number = []
