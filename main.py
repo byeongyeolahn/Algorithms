@@ -1,8 +1,10 @@
 import Quicksort
 import time
+import sys
 
 if __name__ =="__main__":
     start = time.time()
+
     Quicksort.Random_number()
     Quicksort.Forward_sort()
     Quicksort.Reverse_sort()
