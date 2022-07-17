@@ -1,49 +1,54 @@
+from fnmatch import fnmatch
 import random
 from unittest import result
 import pandas as pd
 import numpy as np
 import csv
 
-def Random_number():
-    Random_list = list(range(1,1000000))
-    random.shuffle(Random_list) # 랜덤 상태
-    file = open('Random_list.csv', 'w')
-    file.writelines('\n'.join(map(str,Random_list))) # 개행을 주어 CSV 파일에 입력
-    file.close()
+def Filedata_input():
 
-def Forward_sort():
-    Forward_list = list(range(1,1000000))
-    random.shuffle(Forward_list) # 랜덤 상태
-    file = open('Foward_list.csv', 'w')
-    file.writelines('\n'.join(map(str,Forward_list))) # 개행을 주어 CSV 파일에 입력
-    file.close()
-
-def Reverse_sort():
-    Reverse_list = list(range(1,1000000))
-    Reverse_list.sort(reverse=True)
-    file = open('Reverse_list.csv', 'w')
-    file.writelines('\n'.join(map(str,Reverse_list))) # 개행을 주어 CSV 파일에 입력
-    file.close()
+    #랜덤
+    Rn_list = list(range(1,1000000))
+    Rn_filename = 'Random_list.csv'
+    random.shuffle(Rn_list) # 대입이 이루어지지 않음 수정할 것 
+    Rn_file = open(Rn_filename, 'w')
+    Rn_file.writelines('\n'.join(map(str,Rn_list))) # 개행을 주어 세로로 입력
+    Rn_file.close()
+    csv_open(Rn_filename)
     
-def csv_open():
+    # 순방향
+    num_list = list(range(1,1000000))
+    Fn_filename = 'Foward_list.csv'
+    Fn_file = open(Fn_filename, 'w')
+    Fn_file.writelines('\n'.join(map(str,num_list)))
+    Fn_file.close()
+    csv_open(Fn_filename)
+
+    #역방향
+    Rn_list = list(range(1,1000000))
+    Rn_list.sort(reverse=True)
+    Re_filename = 'Reverse_list.csv'
+    Re_file = open('Reverse_list.csv', 'w')
+    Re_file.writelines('\n'.join(map(str,Rn_list)))
+    Re_file.close()
+    csv_open(Re_filename)
+    
+def csv_open(filename):
     csv_list = []
-    csv_path = open('Random_list.csv', 'r')
+    csv_path = open(filename, 'r')
     read_csv = csv_path.readlines()
-    Random_csv = list(map(lambda s: s.strip(), read_csv)) # 문자열 \n 제거 
-    for i in Random_csv:
+    colw_csv = list(map(lambda s: s.strip(), read_csv)) # 문자열 \n 제거 
+    for i in colw_csv:
         csv_list.append(int(i))
     quickSort_fun(csv_list, 0, len(csv_list)-1)
-    result_csvw(csv_list)
-    # result_csvw(quickSort_fun(csv_list, 0, len(csv_list)-1))
-    print("Random 퀵 정렬 완료")
+    result_csvw(filename, csv_list)
 
-def result_csvw(result_list):
-    result_csv = open('result.csv','w')
+def result_csvw(file_name, result_list):
+    result_csv = open(file_name+'_result.csv','w')
     result_csv.writelines('\n'.join(map(str,result_list))) # 개행을 주어 CSV 파일에 입력
     result_csv.close()
-    print("완료")
     
-def slice_fun(num_list,front,end):
+def slice_fun(num_list,front,end): # quicksort_fun에서 호출
 
     pivot = num_list[(front+end)//2]
 

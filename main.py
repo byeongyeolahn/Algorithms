@@ -5,10 +5,7 @@ import sys
 if __name__ =="__main__":
     start = time.time()
 
-    Quicksort.Random_number()
-    Quicksort.Forward_sort()
-    Quicksort.Reverse_sort()
-    Quicksort.csv_open()
+    Quicksort.Filedata_input()
     end = time.time()
     # Quicksort.pandas_csv()
-    print(time.time()-start)
+    print("시간 성능 측정 : ",time.time()-start)
