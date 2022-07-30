@@ -4,7 +4,7 @@ from unittest import result
 import pandas as pd
 import numpy as np
 import csv
-
+    
 def Filedata_input():
 
     #랜덤
