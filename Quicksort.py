@@ -4,13 +4,16 @@ from unittest import result
 import pandas as pd
 import numpy as np
 import csv
-    
+import os
+import psutil
+import time
+
 def Filedata_input():
 
     #랜덤
     Rn_list = list(range(1,1000000))
     Rn_filename = 'Random_list.csv'
-    random.shuffle(Rn_list) # 대입이 이루어지지 않음 수정할 것 
+    random.shuffle(Rn_list)
     Rn_file = open(Rn_filename, 'w')
     Rn_file.writelines('\n'.join(map(str,Rn_list))) # 개행을 주어 세로로 입력
     Rn_file.close()
@@ -32,7 +35,8 @@ def Filedata_input():
     Re_file.writelines('\n'.join(map(str,Rn_list)))
     Re_file.close()
     csv_open(Re_filename)
-    
+
+#파일 오픈 및 데이터 read    
 def csv_open(filename):
     csv_list = []
     csv_path = open(filename, 'r')
@@ -43,12 +47,14 @@ def csv_open(filename):
     quickSort_fun(csv_list, 0, len(csv_list)-1)
     result_csvw(filename, csv_list)
 
+# 결과 csv 파일 생성
 def result_csvw(file_name, result_list):
     result_csv = open(file_name+'_result.csv','w')
     result_csv.writelines('\n'.join(map(str,result_list))) # 개행을 주어 CSV 파일에 입력
     result_csv.close()
-    
-def slice_fun(num_list,front,end): # quicksort_fun에서 호출
+
+#quicksort_fun 자동 호출  
+def slice_fun(num_list,front,end):
 
     pivot = num_list[(front+end)//2]
 
@@ -74,7 +80,19 @@ def quickSort_fun(csv_num_list,front,end):
     if slice_list < end: # 기존 배열 마지막 지점 도달할 때까지 반복
         quickSort_fun(csv_num_list,slice_list,end)
 
-
+def memory_use(messae: str='debug'):
+    p=psutil.Process()
+    rss = p.memory_info().rss/2**20
+    return rss
+    
+if __name__ =="__main__":
+    start = time.time()
+    first_memory = memory_use()
+    Filedata_input()
+    end = time.time()
+    finish_memory = memory_use()
+    print("사용 메모리 :", finish_memory - first_memory,"MB")
+    print("시간 성능 측정 : ",time.time()-start)
 
 
 
