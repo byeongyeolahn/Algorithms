@@ -30,9 +30,14 @@ def slice_fun(num_list,front,end):
 
     return front #다음 인덱스 반환
 
+# def insert_fun(arr):
+#     for end in range()
+    
+
 def quickSort_fun(csv_num_list,front,end):
-    size = len(csv_num_list)/len(arr[0])
     slice_list = slice_fun(csv_num_list,front,end) #pivot보다 큰 그룹의 첫 번째 idx 반환
+    # if len(slice_list) <= 200:
+    #     # insert_fun 
 
     if front < slice_list-1: #1개 될때까지 반복
         quickSort_fun(csv_num_list,front,slice_list-1)
@@ -60,7 +65,8 @@ if __name__ =="__main__":
         start = time.time()
         first_memory = memory_use()
         quickSort_fun(csv_list, 0, len(csv_list)-1)
+        print(f"{filename[i]} 시간 성능 측정 : ",time.time()-start)
         finish_memory = memory_use()
-        print("사용 메모리 :", finish_memory - first_memory,"MB")
-        print("시간 성능 측정 : ",time.time()-start)
+        print(f"{filename[i]} 사용 메모리 :", finish_memory - first_memory,"MB")
+ 
         result_csvw(filename[i], csv_list)

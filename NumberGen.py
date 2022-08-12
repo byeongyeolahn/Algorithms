@@ -2,7 +2,6 @@ import random
 import csv
 
 def Filedata_input():
-
     #랜덤
     Rn_list = list(range(1,1000001))
     Rn_filename = 'Random_list.csv'

@@ -15,7 +15,8 @@ def result_csvw(file_name, result_list):
 
 #quicksort_fun 자동 호출  
 def slice_fun(num_list,front,end):
-    pivot = num_list[front]
+    ran_num = random.randint(front, end)
+    pivot = num_list[ran_num]
 
     while front <= end:
         while num_list[front] < pivot:
@@ -56,10 +57,11 @@ if __name__ =="__main__":
         for r in colw_csv:
             csv_list.append(int(r))
 
-        start = time.time()
         first_memory = memory_use()
+        start = time.time()
         quickSort_fun(csv_list, 0, len(csv_list)-1)
+        # csv_list.sort() # Sort와 비교 
+        print(f"{filename[i]} 시간 성능 측정 : ",time.time()-start)
         finish_memory = memory_use()
-        print("사용 메모리 :", finish_memory - first_memory,"MB")
-        print("시간 성능 측정 : ",time.time()-start)
+        print(f"{filename[i]} 사용 메모리 :", finish_memory - first_memory,"MB")
         result_csvw(filename[i], csv_list)
